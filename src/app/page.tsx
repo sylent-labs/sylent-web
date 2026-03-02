@@ -1,14 +1,12 @@
 import Hero from "@/components/sections/Hero";
-import Mission from "@/components/sections/Mission";
-import Vision from "@/components/sections/Vision";
+import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 
 export default function Page() {
   return (
       <main>
         <Hero />
-        <Mission />
-        <Vision />
+        <About />
         <Projects />
       </main>
   );
