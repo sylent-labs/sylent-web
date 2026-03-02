@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+:root {
+  /* animation defaults (silences linter) */
+  --dur: 1200ms;
+  --d: 0ms;
+
+  /* fonts (only if you are NOT using next/font yet) */
+  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+:root{
+  --bg:#050507;
+  --red:#ff1b2d;
+}
+
+html,body{
+  background:var(--bg);
+  color:white;
+  cursor:none;
+}
+
+a,button{
+  cursor:none;
+}
+
+canvas { display: block; }
+
+/* =============================
+   Scroll-reversible 3D reveal
+   LEFT & RIGHT → CENTER (slower)
+   Speed controls:
+   - per-card duration: --dur (ms)
+   - stagger delay:     --d (ms)
+============================= */
+
+[data-reveal] {
+  opacity: 0;
+  filter: blur(12px);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  transition:
+          opacity var(--dur, 1200ms) cubic-bezier(.22,.9,.18,1),
+          transform var(--dur, 1200ms) cubic-bezier(.22,.9,.18,1),
+          filter var(--dur, 1200ms) cubic-bezier(.22,.9,.18,1);
+
+  transition-delay: var(--d, 0ms);
+  will-change: transform, opacity, filter;
+}
+
+/* FROM LEFT */
+[data-reveal][data-from="left"] {
+  transform: translate3d(-80px, 0, -60px) rotateY(14deg) scale(0.96);
+}
+
+/* FROM RIGHT */
+[data-reveal][data-from="right"] {
+  transform: translate3d(80px, 0, -60px) rotateY(-14deg) scale(0.96);
+}
+
+/* IN VIEW */
+[data-reveal].is-in {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* =============================
+   Shine cursor overlay (Projects only)
+============================= */
+.bf-shine-cursor{
+  --x: 50%;
+  --y: 50%;
+  opacity: 0;
+  transition: opacity 250ms ease;
+
+  /* the shine itself */
+  background:
+          radial-gradient(180px 180px at var(--x) var(--y),
+          rgba(255,255,255,0.18),
+          rgba(255,255,255,0.08) 35%,
+          transparent 70%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+
+/* =============================
+   Projects background (strong + 3D-ish)
+============================= */
+.bf-projects-bg {
+  --px: 0;
+  --py: 0;
+  background: #000;
+}
+
+.bf-depth-well {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+          radial-gradient(
+                  900px 480px at 50% 38%,
+                  rgba(255,255,255,0.10),
+                  rgba(255,255,255,0.04) 35%,
+                  transparent 65%
+          );
+}
+
+.bf-grid {
+  position: absolute;
+  inset: -20%;
+  z-index: 2;
+  background-image:
+          linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 90px 90px;
+  transform:
+          perspective(900px)
+          rotateX(calc(var(--py) * -8deg))
+          rotateY(calc(var(--px) * 8deg))
+          translateZ(-120px);
+  opacity: 0.22;
+}
+
+.bf-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(110px);
+  z-index: 0;
+  will-change: transform;
+}
+
+.bf-blob-a {
+  width: 680px;
+  height: 680px;
+  left: -240px;
+  top: -200px;
+  background: rgba(255, 40, 65, 0.22);
+  transform: translate3d(calc(var(--px) * 70px), calc(var(--py) * 55px), 0);
+}
+
+.bf-blob-b {
+  width: 640px;
+  height: 640px;
+  right: -260px;
+  top: 60px;
+  background: rgba(80, 160, 255, 0.18);
+  transform: translate3d(calc(var(--px) * -65px), calc(var(--py) * 50px), 0);
+}
+
+.bf-blob-c {
+  width: 820px;
+  height: 820px;
+  left: 20%;
+  bottom: -420px;
+  background: rgba(255, 255, 255, 0.10);
+  transform: translate3d(calc(var(--px) * 45px), calc(var(--py) * -40px), 0);
+}
+
+.bf-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+}
+
+.bf-project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+          180deg,
+          rgba(255,255,255,0.35),
+          rgba(255,255,255,0.05),
+          rgba(255,255,255,0.15)
+  );
+  -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-grid,
+  .bf-blob-a,
+  .bf-blob-b,
+  .bf-blob-c {
+    transform: none !important;
+  }
+}
