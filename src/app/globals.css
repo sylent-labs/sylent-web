@@ -32,12 +32,8 @@
 html,body{
   background:var(--bg);
   color:white;
-  cursor:none;
 }
 
-a,button{
-  cursor:none;
-}
 
 canvas { display: block; }
 

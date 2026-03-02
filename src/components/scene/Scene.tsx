@@ -5,7 +5,6 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useMemo, useRef } from "react";
-import Cursor3D from "@/components/cursor/Cursor3D";
 import { cursorStore } from "@/lib/cursorStore";
 
 function FloatingCubes({ count = 140 }) {
@@ -126,7 +125,6 @@ export default function Scene() {
                 <FloatingCubes />
                 <HeroCube />
                 <CameraRig />
-                <Cursor3D />
 
                 <Environment preset="city" />
 

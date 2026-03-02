@@ -23,19 +23,21 @@ export default function Cursor3D() {
   const planePoint = useMemo(() => new THREE.Vector3(), []);
   const scaleVec = useMemo(() => new THREE.Vector3(), []);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     // Plane in front of camera (reused vectors)
     camera.getWorldDirection(camDir);
-    planePoint.copy(camera.position).addScaledVector(camDir, 2.2);
+    planePoint.copy(camera.position).addScaledVector(camDir, 1.5);
     plane.setFromNormalAndCoplanarPoint(camDir, planePoint);
 
     // Ray to plane (Vector2 required)
     mouse.set(cursorStore.x, cursorStore.y);
     raycaster.setFromCamera(mouse, camera);
-    raycaster.ray.intersectPlane(plane, target);
+    const hit = raycaster.ray.intersectPlane(plane, target);
 
-    // Smooth follow
-    pos.lerp(target, 1 - Math.pow(0.001, delta));
+    // Only update position if intersection succeeded
+    if (hit) {
+      pos.lerp(target, 1 - Math.pow(0.001, delta));
+    }
     mesh.current.position.copy(pos);
 
     // Hover reaction (reuse scale vector)
@@ -47,12 +49,12 @@ export default function Cursor3D() {
   return (
     <mesh ref={mesh} renderOrder={999}>
       <sphereGeometry args={[0.06, 32, 32]} />
-      <meshStandardMaterial
-        color="#ff1b2d"
-        emissive="#ff1b2d"
-        emissiveIntensity={cursorStore.hovering ? 3.2 : 2.2}
-        roughness={0.2}
-        metalness={0.6}
+      <meshBasicMaterial
+        color="#ffffff"
+        toneMapped={false}
+        depthTest={false}
+        transparent
+        opacity={0.9}
       />
     </mesh>
   );

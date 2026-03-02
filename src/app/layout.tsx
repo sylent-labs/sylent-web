@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 import CursorListener from "@/components/cursor/CursorListener";
+
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -27,7 +27,6 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* ✅ required for 3D cursor */}
         <CursorListener />
         {children}
         </body>
