@@ -41,6 +41,7 @@ export default function Header() {
           <div className="h-3 w-3 rounded-sm bg-red-500 shadow-[0_0_18px_rgba(255,27,45,0.8)]" />
           <span className="text-sm font-semibold tracking-[0.22em] sm:text-base">
             SYLENT
+
           </span>
         </div>
 
