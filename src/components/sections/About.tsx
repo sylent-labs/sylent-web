@@ -11,6 +11,45 @@ const CAPABILITIES = [
     "Enterprise Solutions",
 ];
 
+interface TeamMember {
+    name: string;
+    role: string;
+    bio: string;
+}
+
+const TEAM: TeamMember[] = [
+    {
+        name: "Van Keith",
+        role: "Chief Executive Officer",
+        bio: "Over a decade of full-stack, end-to-end software engineering and technical leadership. Built and shipped products for some of the largest companies in fintech, insurance and consumer tech. Multiple award winner in design and featured speaker at international engineering conventions. Lived and worked in Kyoto, Japan and Newcastle, Australia, collaborating with clients and teams across the US, Brazil, Japan, China, Singapore, Taiwan and Hong Kong.",
+    },
+    {
+        name: "Bob",
+        role: "Chief Technology Officer",
+        bio: "30 years in software engineering spanning backend architecture, systems design and infrastructure at scale. Deep expertise in distributed systems, database performance tuning and platform reliability. Has architected production systems processing millions of transactions and led engineering organizations through multiple growth stages.",
+    },
+    {
+        name: "Jonathan",
+        role: "Senior Backend Engineer",
+        bio: "Backend specialist with deep expertise in Python, Django and cloud infrastructure across AWS and Azure. Builds high-throughput API services, data pipelines and async processing systems. Strong track record in fintech and enterprise platforms where reliability and performance are non-negotiable.",
+    },
+    {
+        name: "Blair",
+        role: "Senior Frontend Engineer",
+        bio: "Frontend engineer with production experience across React, React Native, Swift and Kotlin. Ships performant web applications and native mobile apps for iOS and Android. Focused on component architecture, accessibility and interfaces that feel fast on any device.",
+    },
+    {
+        name: "Harvey",
+        role: "Lead UI/UX Designer",
+        bio: "Award-winning designer specializing in mobile app, web app and product experience design. Creates design systems, interaction patterns and visual identities that drive user adoption. Bridges the gap between design intent and engineering execution with pixel-level precision.",
+    },
+    {
+        name: "Donna",
+        role: "Chief Financial Officer",
+        bio: "Manages financial operations, budgeting, forecasting and compliance across all Sylent engagements. Ensures project profitability and sustainable growth while keeping the business lean and accountable to every dollar spent.",
+    },
+];
+
 export default function About() {
     const wrapRef = useRevealOnScroll();
 
@@ -20,6 +59,67 @@ export default function About() {
             <div className="pointer-events-none absolute inset-x-0 -top-32 h-32 bg-linear-to-b from-black to-transparent -z-10" />
 
             <div ref={wrapRef} className="mx-auto max-w-4xl space-y-24 sm:space-y-32 md:space-y-40">
+                {/* ── Team subsection ── */}
+                <div id="team">
+                    <div
+                        data-reveal
+                        data-from="left"
+                        style={{ "--d": "0ms", "--dur": "1000ms" } as React.CSSProperties}
+                        className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs text-white/70 backdrop-blur-xl sm:px-4 sm:py-2"
+                    >
+                        <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                        About Us
+                    </div>
+
+                    <h2
+                        data-reveal
+                        data-from="left"
+                        style={{ "--d": "100ms", "--dur": "1200ms" } as React.CSSProperties}
+                        className="text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-5xl"
+                    >
+                        The people behind the systems.
+                    </h2>
+
+                    <p
+                        data-reveal
+                        data-from="left"
+                        style={{ "--d": "200ms", "--dur": "1200ms" } as React.CSSProperties}
+                        className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base md:text-lg"
+                    >
+                        A tight, senior team with decades of combined experience
+                        shipping production systems across industries and continents.
+                    </p>
+
+                    <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5">
+                        {TEAM.map((member, idx) => (
+                            <div
+                                key={member.name}
+                                data-reveal
+                                data-from={idx % 2 === 0 ? "left" : "right"}
+                                style={
+                                    {
+                                        "--d": `${idx * 80 + 300}ms`,
+                                        "--dur": "1200ms",
+                                    } as React.CSSProperties
+                                }
+                                className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6"
+                            >
+                                <div className="mb-3">
+                                    <p className="text-base font-semibold text-white">
+                                        {member.name}
+                                    </p>
+                                    <p className="text-xs font-medium text-red-500">
+                                        {member.role}
+                                    </p>
+                                </div>
+                                <p className="text-xs leading-relaxed text-white/55 sm:text-sm">
+                                    {member.bio}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* ── Mission subsection ── */}
                 <div id="mission">
                     <div
