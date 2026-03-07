@@ -95,11 +95,11 @@ export default function Header() {
                     isOpen ? 'visible opacity-100' : 'invisible opacity-0'
                 }`}
             >
-                {/* Backdrop — tap anywhere to close */}
+                {/* Backdrop — tap to close */}
                 <button
                     type="button"
                     aria-label="Close menu"
-                    className="absolute inset-0 h-full w-full bg-black/80 backdrop-blur-md"
+                    className="absolute inset-0 z-0 h-full w-full bg-black/80 backdrop-blur-md"
                     onClick={() => setIsOpen(false)}
                 />
 
@@ -127,14 +127,14 @@ export default function Header() {
                     </svg>
                 </button>
 
-                {/* Menu content */}
-                <nav className="relative flex h-full flex-col items-center justify-center gap-2 px-8">
+                {/* Menu content — pointer-events-none so taps on empty space hit the backdrop */}
+                <nav className="pointer-events-none relative flex h-full flex-col items-center justify-center gap-2 px-8">
                     {NAV_LINKS.map((link, i) => (
                         <a
                             key={link.href}
                             href={link.href}
                             onClick={() => setIsOpen(false)}
-                            className={`block w-full rounded-2xl border border-white/5 bg-white/5 px-6 py-4 text-center text-lg font-medium text-white/90 transition-all duration-300 hover:border-white/10 hover:bg-white/10 ${
+                            className={`pointer-events-auto block w-full rounded-2xl border border-white/5 bg-white/5 px-6 py-4 text-center text-lg font-medium text-white/90 transition-all duration-300 hover:border-white/10 hover:bg-white/10 ${
                                 isOpen
                                     ? 'translate-y-0 opacity-100'
                                     : 'translate-y-4 opacity-0'
@@ -153,7 +153,7 @@ export default function Header() {
                     <a
                         href="#contact"
                         onClick={() => setIsOpen(false)}
-                        className={`mt-4 block w-full rounded-2xl bg-red-500 px-6 py-4 text-center text-lg font-semibold text-white shadow-[0_0_30px_rgba(255,27,45,0.3)] transition-all duration-300 hover:brightness-110 ${
+                        className={`pointer-events-auto mt-4 block w-full rounded-2xl bg-red-500 px-6 py-4 text-center text-lg font-semibold text-white shadow-[0_0_30px_rgba(255,27,45,0.3)] transition-all duration-300 hover:brightness-110 ${
                             isOpen
                                 ? 'translate-y-0 opacity-100'
                                 : 'translate-y-4 opacity-0'
