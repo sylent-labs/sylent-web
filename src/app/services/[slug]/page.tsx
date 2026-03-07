@@ -1,13 +1,13 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import type { Metadata } from "next";
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import type { Metadata } from 'next';
 
 import {
     getServiceBySlug,
     getRelatedServices,
     getAllServiceSlugs,
     SERVICE_CATEGORIES,
-} from "@/lib/services";
+} from '@/lib/services';
 
 // ── Static generation ──
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
     const service = getServiceBySlug(slug);
 
     if (!service) {
-        return { title: "Not Found | Sylent" };
+        return { title: 'Not Found | Sylent' };
     }
 
     return {
@@ -33,7 +33,7 @@ export async function generateMetadata({
         openGraph: {
             title: `${service.title} | Sylent`,
             description: service.shortDescription,
-            type: "website",
+            type: 'website',
         },
     };
 }
@@ -53,7 +53,7 @@ export default async function ServicePage({
     }
 
     const category = SERVICE_CATEGORIES.find(
-        (c) => c.slug === service.category
+        (c) => c.slug === service.category,
     );
     const related = getRelatedServices(service);
 
@@ -115,7 +115,7 @@ export default async function ServicePage({
                         Overview
                     </h2>
                     <div className="space-y-4">
-                        {service.overview.split("\n\n").map((paragraph, i) => (
+                        {service.overview.split('\n\n').map((paragraph, i) => (
                             <p
                                 key={i}
                                 className="text-sm leading-relaxed text-white/65 sm:text-base"

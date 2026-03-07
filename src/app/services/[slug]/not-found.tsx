@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ServiceNotFound() {
     return (
@@ -7,7 +7,8 @@ export default function ServiceNotFound() {
                 Service not found
             </h1>
             <p className="mt-3 text-sm text-white/60">
-                The service you are looking for does not exist or has been moved.
+                The service you are looking for does not exist or has been
+                moved.
             </p>
             <Link
                 href="/#services"

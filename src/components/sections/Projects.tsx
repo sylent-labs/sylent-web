@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 
-import { useRevealOnScroll } from "@/lib/useRevealOnScroll";
+import { useRevealOnScroll } from '@/lib/useRevealOnScroll';
 
 type Project = {
     title: string;
@@ -15,40 +15,40 @@ type Project = {
 
 const PROJECTS: Project[] = [
     {
-        title: "Shopify Growth Store",
-        desc: "Conversion-focused product page + upsells",
-        tag: "eCommerce",
-        image: "https://picsum.photos/seed/1/1200/800",
+        title: 'Shopify Growth Store',
+        desc: 'Conversion-focused product page + upsells',
+        tag: 'eCommerce',
+        image: 'https://picsum.photos/seed/1/1200/800',
     },
     {
-        title: "Product Landing Page",
-        desc: "High-end hero + animated sections",
-        tag: "Web",
-        image: "https://picsum.photos/seed/2/1200/800",
+        title: 'Product Landing Page',
+        desc: 'High-end hero + animated sections',
+        tag: 'Web',
+        image: 'https://picsum.photos/seed/2/1200/800',
     },
     {
-        title: "Web App Dashboard",
-        desc: "Fast UI, clean data views, modern UX",
-        tag: "SaaS",
-        image: "https://picsum.photos/seed/3/1200/800",
+        title: 'Web App Dashboard',
+        desc: 'Fast UI, clean data views, modern UX',
+        tag: 'SaaS',
+        image: 'https://picsum.photos/seed/3/1200/800',
     },
     {
-        title: "Brand Website",
-        desc: "Minimal, premium, Apple-style layout",
-        tag: "Branding",
-        image: "https://picsum.photos/seed/4/1200/800",
+        title: 'Brand Website',
+        desc: 'Minimal, premium, Apple-style layout',
+        tag: 'Branding',
+        image: 'https://picsum.photos/seed/4/1200/800',
     },
     {
-        title: "Lead Gen Funnel",
-        desc: "Speed + clear CTA + split-test ready",
-        tag: "Marketing",
-        image: "https://picsum.photos/seed/5/1200/800",
+        title: 'Lead Gen Funnel',
+        desc: 'Speed + clear CTA + split-test ready',
+        tag: 'Marketing',
+        image: 'https://picsum.photos/seed/5/1200/800',
     },
     {
-        title: "Custom CMS Site",
-        desc: "Flexible content, clean components",
-        tag: "CMS",
-        image: "https://picsum.photos/seed/6/1200/800",
+        title: 'Custom CMS Site',
+        desc: 'Flexible content, clean components',
+        tag: 'CMS',
+        image: 'https://picsum.photos/seed/6/1200/800',
     },
 ];
 
@@ -70,12 +70,18 @@ export default function Projects() {
 
         const onMove = (e: MouseEvent) => {
             const r = el.getBoundingClientRect();
-            el.style.setProperty("--px", `${(e.clientX - r.left) / r.width - 0.5}`);
-            el.style.setProperty("--py", `${(e.clientY - r.top) / r.height - 0.5}`);
+            el.style.setProperty(
+                '--px',
+                `${(e.clientX - r.left) / r.width - 0.5}`,
+            );
+            el.style.setProperty(
+                '--py',
+                `${(e.clientY - r.top) / r.height - 0.5}`,
+            );
         };
 
-        window.addEventListener("mousemove", onMove, { passive: true });
-        return () => window.removeEventListener("mousemove", onMove);
+        window.addEventListener('mousemove', onMove, { passive: true });
+        return () => window.removeEventListener('mousemove', onMove);
     }, []);
 
     // ✨ Shine cursor only inside this section
@@ -89,21 +95,21 @@ export default function Projects() {
             const x = e.clientX - r.left;
             const y = e.clientY - r.top;
 
-            cursor.style.setProperty("--x", `${x}px`);
-            cursor.style.setProperty("--y", `${y}px`);
-            cursor.style.opacity = "1";
+            cursor.style.setProperty('--x', `${x}px`);
+            cursor.style.setProperty('--y', `${y}px`);
+            cursor.style.opacity = '1';
         };
 
         const leave = () => {
-            cursor.style.opacity = "0";
+            cursor.style.opacity = '0';
         };
 
-        section.addEventListener("mousemove", move);
-        section.addEventListener("mouseleave", leave);
+        section.addEventListener('mousemove', move);
+        section.addEventListener('mouseleave', leave);
 
         return () => {
-            section.removeEventListener("mousemove", move);
-            section.removeEventListener("mouseleave", leave);
+            section.removeEventListener('mousemove', move);
+            section.removeEventListener('mouseleave', leave);
         };
     }, []);
 
@@ -145,8 +151,8 @@ export default function Projects() {
                         Projects we shipped lately
                     </h2>
                     <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65 md:text-base">
-                        A curated set of builds across eCommerce, product sites, and custom web
-                        apps.
+                        A curated set of builds across eCommerce, product sites,
+                        and custom web apps.
                     </p>
                 </header>
 
@@ -154,14 +160,14 @@ export default function Projects() {
                     {PROJECTS.map((p, idx) => (
                         <a
                             key={p.title}
-                            href={p.href ?? "#"}
-                            target={p.href ? "_blank" : undefined}
-                            rel={p.href ? "noopener noreferrer" : undefined}
+                            href={p.href ?? '#'}
+                            target={p.href ? '_blank' : undefined}
+                            rel={p.href ? 'noopener noreferrer' : undefined}
                             data-reveal
-                            data-from={idx % 2 === 0 ? "left" : "right"} // ✅ LEFT / RIGHT → center
+                            data-from={idx % 2 === 0 ? 'left' : 'right'} // ✅ LEFT / RIGHT → center
                             style={{
-                                ["--d" as any]: `${idx * STAGGER_MS}ms`,
-                                ["--dur" as any]: `${REVEAL_MS}ms`,
+                                ['--d' as any]: `${idx * STAGGER_MS}ms`,
+                                ['--dur' as any]: `${REVEAL_MS}ms`,
                             }}
                             className="
                 bf-project-card group relative overflow-hidden rounded-2xl
@@ -176,21 +182,27 @@ export default function Projects() {
                                 const r = el.getBoundingClientRect();
 
                                 // shine position (per-card highlight)
-                                const mx = ((e.clientX - r.left) / r.width) * 100;
-                                const my = ((e.clientY - r.top) / r.height) * 100;
-                                el.style.setProperty("--mx", `${mx}%`);
-                                el.style.setProperty("--my", `${my}%`);
+                                const mx =
+                                    ((e.clientX - r.left) / r.width) * 100;
+                                const my =
+                                    ((e.clientY - r.top) / r.height) * 100;
+                                el.style.setProperty('--mx', `${mx}%`);
+                                el.style.setProperty('--my', `${my}%`);
 
                                 // tilt values
                                 const tiltX =
-                                    ((e.clientY - (r.top + r.height / 2)) / r.height) * -6;
+                                    ((e.clientY - (r.top + r.height / 2)) /
+                                        r.height) *
+                                    -6;
                                 const tiltY =
-                                    ((e.clientX - (r.left + r.width / 2)) / r.width) * 6;
+                                    ((e.clientX - (r.left + r.width / 2)) /
+                                        r.width) *
+                                    6;
 
                                 el.style.transform = `translateY(-6px) translateZ(20px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = "";
+                                e.currentTarget.style.transform = '';
                             }}
                         >
                             {/* per-card shine */}
@@ -198,7 +210,7 @@ export default function Projects() {
                                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                                 style={{
                                     background:
-                                        "radial-gradient(800px 260px at var(--mx, 20%) var(--my, 20%), rgba(255,255,255,0.20), transparent 55%)",
+                                        'radial-gradient(800px 260px at var(--mx, 20%) var(--my, 20%), rgba(255,255,255,0.20), transparent 55%)',
                                 }}
                             />
 
@@ -231,11 +243,13 @@ export default function Projects() {
                                         <h3 className="text-base font-semibold text-white">
                                             {p.title}
                                         </h3>
-                                        <p className="mt-1 text-sm text-white/60">{p.desc}</p>
+                                        <p className="mt-1 text-sm text-white/60">
+                                            {p.desc}
+                                        </p>
                                     </div>
                                     <span className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs text-white/70">
-                    {p.tag}
-                  </span>
+                                        {p.tag}
+                                    </span>
                                 </div>
                             </div>
                         </a>

@@ -1,12 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { useRevealOnScroll } from "@/lib/useRevealOnScroll";
-import {
-    SERVICE_CATEGORIES,
-    getServicesByCategory,
-} from "@/lib/services";
+import { useRevealOnScroll } from '@/lib/useRevealOnScroll';
+import { SERVICE_CATEGORIES, getServicesByCategory } from '@/lib/services';
 
 export default function Services() {
     const wrapRef = useRevealOnScroll();
@@ -22,7 +19,10 @@ export default function Services() {
                     data-reveal
                     data-from="left"
                     style={
-                        { "--d": "0ms", "--dur": "1000ms" } as React.CSSProperties
+                        {
+                            '--d': '0ms',
+                            '--dur': '1000ms',
+                        } as React.CSSProperties
                     }
                     className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs text-white/70 backdrop-blur-xl sm:px-4 sm:py-2"
                 >
@@ -35,7 +35,10 @@ export default function Services() {
                     data-reveal
                     data-from="left"
                     style={
-                        { "--d": "100ms", "--dur": "1200ms" } as React.CSSProperties
+                        {
+                            '--d': '100ms',
+                            '--dur': '1200ms',
+                        } as React.CSSProperties
                     }
                     className="text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-5xl"
                 >
@@ -46,13 +49,16 @@ export default function Services() {
                     data-reveal
                     data-from="left"
                     style={
-                        { "--d": "200ms", "--dur": "1200ms" } as React.CSSProperties
+                        {
+                            '--d': '200ms',
+                            '--dur': '1200ms',
+                        } as React.CSSProperties
                     }
                     className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base"
                 >
                     Startup speed. Enterprise discipline. Every service below is
-                    backed by engineers who have shipped production systems across
-                    fintech, insurance, e-commerce and enterprise.
+                    backed by engineers who have shipped production systems
+                    across fintech, insurance, e-commerce and enterprise.
                 </p>
 
                 {/* Category groups */}
@@ -63,11 +69,11 @@ export default function Services() {
                             <div
                                 key={category.slug}
                                 data-reveal
-                                data-from={catIdx % 2 === 0 ? "left" : "right"}
+                                data-from={catIdx % 2 === 0 ? 'left' : 'right'}
                                 style={
                                     {
-                                        "--d": `${catIdx * 100 + 300}ms`,
-                                        "--dur": "1200ms",
+                                        '--d': `${catIdx * 100 + 300}ms`,
+                                        '--dur': '1200ms',
                                     } as React.CSSProperties
                                 }
                             >
