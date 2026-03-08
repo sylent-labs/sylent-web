@@ -7,9 +7,9 @@ export default function Page() {
     return (
         <main>
             <Hero />
-            <About />
             <Services />
             <Projects />
+            <About />
         </main>
     );
 }
